@@ -1,0 +1,140 @@
+\documentclass[13pt, oneside, a4paper]{book}
+\usepackage[margin=2cm]{geometry}
+\usepackage{fontspec}
+\usepackage{lmodern}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{menukeys}
+\usepackage{amsmath}
+\hypersetup{
+    colorlinks,
+    citecolor=red,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\graphicspath{{./assets}}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+\begin{titlepage}
+\begin{center}
+        \pagebreak
+
+        \hspace{0pt}
+        \vfill
+        {\fontsize{32pt}{10pt}\selectfont Group 3 Manual}\\
+        \vspace{3cm}
+        \textsc{\Large Mentored by} \\
+
+        {\large Anshul, Ujjwal and Manas} \\
+        \vspace{1cm}
+        \textbf{Last Updated : \today}
+
+        \vspace*{\fill}
+\end{center}
+
+        {\fontsize{11pt}{10pt}\selectfont
+               This document will be updated regularly so no need to download it to local. 
+        }
+\end{titlepage}
+
+\pagenumbering{gobble}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+
+\chapter{Assignment 1}
+\section{System Setup}
+\begin{itemize}
+        \item Install an editor/IDE
+        \item Choose a Language
+        \item Install a compiler
+\end{itemize}
+
+\clearpage
+
+\chapter{Switching from C to C++}
+\section{Why so serious?}
+
+\begin{verbatim}
+#include <stdio.h>
+
+int main() {
+
+        int n;
+        long long m;
+        char s[1000];
+
+        scanf("%d%lld%s", &n, &m, &s);
+
+        printf("%d %lld %s\n", n, s);
+
+        return 0;
+}
+\end{verbatim}
+
+becomes
+
+\begin{verbatim}
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+
+        int n;
+        long long m;
+        char s[1000];
+
+        string ss;
+
+        cin >> n >> m >> s >> ss;
+
+        cout << n << ' ' << m << ' ' << s << ' ' << ss << '\n';
+
+        return 0;
+}
+\end{verbatim}
+
+
+\clearpage
+
+\chapter{Assigment 2}
+\section{How much do you know?}
+The aim is to gauge your level of expertise so that we can provide everyone with what they want without wasting
+anybody's time. Don't cheat or lie, it will defeat the purpose of the assignment.
+
+\subsection{Level 1}
+\begin{enumerate}
+        \item \href{https://leetcode.com/problems/fibonacci-number/}{Fabonacci}
+        \item \href{https://codeforces.com/contest/4/problem/A}{Watermelon}
+\end{enumerate}
+
+\subsection{Level 2}
+\begin{enumerate}
+        \item \href{https://leetcode.com/problems/move-zeroes/}{Zeroes to the end} If you do it in O(n\textsuperscript{2}) we won't mind.
+        \item \href{https://leetcode.com/problems/count-primes/}{Count Primes}
+\end{enumerate}
+
+\subsection{Level 3}
+\begin{enumerate}
+        \item \href{https://leetcode.com/problems/move-zeroes/}{Zeroes to the end} IMP: In a single linear O(n) traversal
+        \item \href{https://leetcode.com/problems/convert-to-base-2/}{Convert to base 2} (because that BE course was not a joke)
+\end{enumerate}
+
+Adding the entry to the google sheet
+
+If you solved 1 from L1; 1, 2 from L2 and none from L3, you write it as \textbf{``10 11 00''}.\\
+Someone who solves all will write \textbf{``11 11 11''} and will color his box green.\\
+Partial solvers color their box blue.\\
+Those who tried but solved none will color their's red.\\
+
+This will be followed for all the future assignments. This assignment needs to be done within next 4 days, and then we will have a little discussion if required.
+
+Indenting the code is very important, I personally follow the K\&R style but you can choose Google, LLVM or clang. Use your left pinky finger to hit the \keys{\tab} key.
+
+\clearpage
+ 
+\end{document}
