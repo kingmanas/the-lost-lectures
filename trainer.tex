@@ -138,4 +138,103 @@ Indenting the code is very important, I personally follow the K\&R style but you
 
 \clearpage
  
+\chapter{Baby Steps}
+\section{Making I/O fast in C++}
+These two lines of code can make your C++ runtimes faster by 50\%, you only notice
+the difference on large testcases.
+
+\begin{verbatim}
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL), cout.tie(NULL);
+\end{verbatim}
+
+\section{A basic template file}
+
+A template is a piece of code you can copy everytime you solve some problem.
+\smallskip
+
+If the  problem has no test cases:
+\begin{verbatim}
+#include <bits/stdc++.h>
+using namespace std;
+
+#define fastIO ios_base::sync_with_stdio(0 && cin.tie(0) && cout.tie(0));
+
+typedef long long ll;
+
+int main() {
+        fastIO;
+
+        // insert your code here ....
+        
+        return 0;
+}
+\end{verbatim}
+
+\hrule
+\bigskip
+
+If the problem has test cases:
+
+\begin{verbatim}
+#include <bits/stdc++.h>
+using namespace std;
+
+#define fastIO ios_base::sync_with_stdio(0 && cin.tie(0) && cout.tie(0));
+
+typedef long long ll;
+
+// this solve() function can be treated exactly like main()
+int solve() {
+        
+        // insert your code here
+        
+        return 0;
+}
+
+int main() {
+        fastIO;
+
+        int t;
+        cin >> t;
+        while(t--) {
+                solve();
+        }
+        
+        return 0;
+}
+\end{verbatim}
+
+\hrule\bigskip
+
+\section{Frequently seen numbers}
+
+There are a few numbers like 10\textsuperscript{7}, 10\textsuperscript{9} + 7 (1000000007) , etc. which you
+will frequently find in problems, we will discuss what they mean over here.
+
+\begin{itemize}
+        \item You can run 10\textsuperscript{7 to 8} iterations in around one second, so
+                mostly you will see that they give size n of array equal to 10\textsuperscript{5} 
+                and number of test cases of the order of 10\textsuperscript{3} or 10\textsuperscript{2}.
+        \item 10\textsuperscript{9} + 7 (1000000007) is provided as a huge prime number you will need
+                to take a modulo with of your answers in combinatorics type problems, where the answer can be so large
+                that it will overflow the 64 bit integer (long long) too! You will need to know the modulo
+                arithmetic rules for solving such problems. 998244353 is another prime number which might be
+                found in a few problems.
+        \item 10\textsuperscript{-9}~\leq~x~\leq~10\textsuperscript{9}, means you need to use \textit{int} for storing x, anything
+                larger than that goes inside the 64 bit long long, which will mostly be mentioned as x~\leq~10\textsuperscript{18}.
+\end{itemize}
+
+\section{Common Terminology}
+
+I have added the ones which always confuse me, will add more as
+they come to my mind.
+
+\begin{itemize}
+        \item \textbf{substring:} A continuous piece cut from a string. For e.g. ``abcd'' is a substring of ``aaabcdddeee'' but ``abcde'' is not
+        \item \textbf{subsequence:} A discontinuous piece of an array or string. In the above example ``abcde'' is a subsequence of ``aaabcdddeee''.
+        \item \textbf{subarray:} It is the \textbf{array} version of \textbf{substring}.
+        \item \textbf{segment:} It is another name for a subarray.
+\end{itemize}
+
 \end{document}
