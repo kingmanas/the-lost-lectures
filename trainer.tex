@@ -100,6 +100,24 @@ int main() {
 }
 \end{verbatim}
 
+\section{C++ style strings}
+
+In C++, the \textbf{string} data type is very similar to character arrays,
+the only thing is here we do not have a NULL terminator. You get the following
+new functionalities:
+
+\smallskip
+
+\texttt{string s = "Hello"; \\
+        string s1 = "abcd", s2 = "abcd";
+}
+
+\begin{itemize}
+        \item append characters : \texttt{s += '2'}
+        \item append string : \texttt{s += ", how are you?"}
+        \item compare strings : \texttt{if(s1 == s2) cout << "Strings are equal!!\symbol{92}n";}
+        \item indexing operator[~] : \texttt{for(int i = 0; i < s.length(); i++) \{ cout << s[i]; \} cout << '\symbol{92}n';} will print all the characters of the string. But that is not how you print a string, you directly do \texttt{cout << s << '\symbol{92}n';}
+\end{itemize}
 
 \clearpage
 
@@ -222,8 +240,8 @@ will frequently find in problems, we will discuss what they mean over here.
                 that it will overflow the 64 bit integer (long long) too! You will need to know the modulo
                 arithmetic rules for solving such problems. 998244353 is another prime number which might be
                 found in a few problems.
-        \item 10\textsuperscript{-9}~\leq~x~\leq~10\textsuperscript{9}, means you need to use \textit{int} for storing x, anything
-                larger than that goes inside the 64 bit long long, which will mostly be mentioned as x~\leq~10\textsuperscript{18}.
+        \item 10\textsuperscript{-9}~\leq~x~\leq~10\textsuperscript{9}, means you need to use \textbf{int} for storing x, anything
+                larger than that goes inside the 64 bit \textbf{long long}, which will mostly be mentioned as x~\leq~10\textsuperscript{18}.
 \end{itemize}
 
 \section{Common Terminology}
