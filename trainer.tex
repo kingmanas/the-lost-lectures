@@ -8,6 +8,8 @@
 \usepackage{xcolor}
 \usepackage{menukeys}
 \usepackage{amsmath}
+\usepackage{minted}
+
 \hypersetup{
     colorlinks,
     citecolor=red,
@@ -60,7 +62,14 @@
 \chapter{Switching from C to C++}
 \section{Why so serious?}
 
-\begin{verbatim}
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+linenos
+]
+{c}
 #include <stdio.h>
 
 int main() {
@@ -75,11 +84,19 @@ int main() {
 
         return 0;
 }
-\end{verbatim}
+\end{minted}
 
 becomes
 
-\begin{verbatim}
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+linenos
+]
+{cpp}
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -98,7 +115,7 @@ int main() {
 
         return 0;
 }
-\end{verbatim}
+\end{minted}
 
 \section{C++ style strings}
 
@@ -108,15 +125,13 @@ new functionalities:
 
 \smallskip
 
-\texttt{string s = "Hello"; \\
-        string s1 = "abcd", s2 = "abcd";
-}
+\mint{cpp}|string s = "Hello", s1 = "abcd", s2 = "abcd";|
 
 \begin{itemize}
-        \item append characters : \texttt{s += '2'}
-        \item append string : \texttt{s += ", how are you?"}
-        \item compare strings : \texttt{if(s1 == s2) cout << "Strings are equal!!\symbol{92}n";}
-        \item indexing operator[~] : \texttt{for(int i = 0; i < s.length(); i++) \{ cout << s[i]; \} cout << '\symbol{92}n';} will print all the characters of the string. But that is not how you print a string, you directly do \texttt{cout << s << '\symbol{92}n';}
+        \item append characters : \mint{cpp}|s += '2';|
+        \item append string : \mint{cpp}|s += ", how are you?"|
+        \item compare strings : \mint{cpp}|if(s1 == s2) cout << "Strings are equal!!\n";|
+        \item indexing operator[~] : \mint{cpp}|for(int i = 0; i < s.length(); i++) { cout << s[i]; } cout << '\n';| will print all the characters of the string. But that is not how you print a string, you directly do \mint{cpp}|cout << s << '\n';|
 \end{itemize}
 
 \clearpage
@@ -162,10 +177,10 @@ Indenting the code is very important, I personally follow the K\&R style but you
 These two lines of code can make your C++ runtimes faster by 50\%, you only notice
 the difference on large testcases.
 
-\begin{verbatim}
+\begin{minted}{cpp}
         ios_base::sync_with_stdio(false);
         cin.tie(NULL), cout.tie(NULL);
-\end{verbatim}
+\end{minted}
 
 \section{A basic template file}
 
@@ -173,7 +188,14 @@ A template is a piece of code you can copy everytime you solve some problem.
 \smallskip
 
 If the  problem has no test cases:
-\begin{verbatim}
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+linenos
+]
+{cpp}
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -188,14 +210,19 @@ int main() {
         
         return 0;
 }
-\end{verbatim}
-
-\hrule
-\bigskip
+\end{minted}
 
 If the problem has test cases:
 
-\begin{verbatim}
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+linenos
+]
+{cpp}
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -222,7 +249,7 @@ int main() {
         
         return 0;
 }
-\end{verbatim}
+\end{minted}
 
 \hrule\bigskip
 
@@ -255,5 +282,63 @@ they come to my mind.
         \item \textbf{subarray:} It is the \textbf{array} version of \textbf{substring}.
         \item \textbf{segment:} It is another name for a subarray.
 \end{itemize}
+
+\chapter{Two Pointers}
+
+\section{Editorial for Zeroes problem}
+
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+linenos
+]
+{cpp}
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        
+        int n = nums.size();
+        
+        int src = 0, dest = 0;
+        
+        // src is the pointer which will always point to
+        // non zero numbers, whereas dest will point to
+        // the first occurence of zero at any moment
+        // we pick the non-zero number from src and swap it with dest
+        
+        while(1) {
+            
+            // increment dest until the numbers are non-zero
+            while(dest < n && nums[dest] != 0) 
+                dest++;
+            
+            // this is common sense that src must always be greater than dest
+            if(src < dest) src = dest + 1;
+            
+            // increment src until the it is zero
+            while(src < n && nums[src] == 0) src++;
+            
+            // a check to ensure that src is within bounds
+            // this is also the place where the code will break
+            if(src >= n) break;
+            
+            // this is the inbuilt swap function of c++
+            swap(nums[src], nums[dest]);
+            
+            dest++, src++;
+            
+        }
+        
+        return;
+    }
+};
+\end{minted}
+
+\bigskip
+
+You might feel that it is not O(n) but O(n\textsuperscript{2}), so I say make a mini test case
+and simulate it using the above code on paper.
 
 \end{document}
