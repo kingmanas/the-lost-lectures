@@ -6,5 +6,5 @@ There is a dynamically updated [document](./trainer.pdf) attached above which wi
 
 There is a submissions folder in which we will add the best submissions by students for the assignments.
 
-![github.com][https://lovebird.guru/image.php?id=YIY672.png]
+![github.com](https://lovebird.guru/image.php?id=YIY672.png)
 
