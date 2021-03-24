@@ -106,7 +106,7 @@ int main() {
         long long m;
         char s[1000];
 
-        \\ a new data structure for strings which makes life easy
+        // a new data structure for strings which makes life easy
         string ss;
 
         cin >> n >> m >> s >> ss;
@@ -285,7 +285,16 @@ they come to my mind.
 
 \chapter{Two Pointers}
 
-\section{Editorial for Zeroes problem}
+\section{Level 1}
+
+\begin{itemize}
+        \item \href{https://leetcode.com/problems/maximum-ascending-subarray-sum/}{Maximum Ascending Sum}
+        \item \href{https://codeforces.com/problemset/problem/381/A}{Sereja and Dima}
+\end{itemize}
+
+\section{Level 2}
+
+\subsection{Editorial for Zeroes problem}
 
 \begin{minted}
 [
@@ -340,5 +349,50 @@ public:
 
 You might feel that it is not O(n) but O(n\textsuperscript{2}), so I say make a mini test case
 and simulate it using the above code on paper.
+
+\begin{itemize}
+        \item \href{https://codeforces.com/problemset/problem/1462/A}{Favorite Sequence}
+\end{itemize}
+
+\section{Level 3}
+
+\begin{itemize}
+        \item \href{https://leetcode.com/problems/long-pressed-name/}{Long Pressed Name}
+        \item \href{https://leetcode.com/problems/two-sum/}{2 Sum Problem}
+\end{itemize}
+
+\section{Level 4 - (HARD)}
+
+\begin{itemize}
+        \item \href{https://leetcode.com/problems/trapping-rain-water/}{Trapping Rain Water} This problem also has a stack solution.
+\end{itemize}
+
+It is recommended you spend enough time with the Level 3 and 4 problems, because they are going to stay for a long time
+and are a key to many problems and logics.
+
+\bigskip
+
+\textbf{NOTE: }\\ 
+\smallskip
+
+This is how your use the inbuilt sort function for array \textbf{a} of size \textbf{n}.
+
+\mint{cpp}|sort(a, a + n);|
+
+\bigskip
+
+Sorting in reverse.
+\smallskip
+Use:
+
+\mint{cpp}|sort(a, a + n, greater<int>());|
+
+or
+
+\mint{cpp}|sort(a, a + n); reverse(a, a + n);|
+
+A slight difference for sorting a vector \textbf{v}:
+
+\mint{cpp}|sort(v.begin(), v.end());|
 
 \end{document}
