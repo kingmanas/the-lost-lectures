@@ -397,4 +397,201 @@ A slight difference for sorting a vector \textbf{v}:
 
 \mint{cpp}|sort(v.begin(), v.end());|
 
+\chapter{std::map}
+
+\section{What is dynamic programming?}
+
+\textit{"If you forget the past, you are doomed to repeat it."}
+
+But what are those problems called where you get the answer right without 
+worrying about the future or the past? \textbf{answer: greedy problems}
+
+Maps be it simple frequency arrays or std::map, help you save your past, so that you can always look back.
+
+\section{K Sum Pair Problem}
+
+Consider the \href{https://leetcode.com/problems/max-number-of-k-sum-pairs/}{Max number of k sum pairs} problem 
+where you had to count the number of pairs in the array with sum k. You followed a two pointer approach 
+where you sorted the array and then took two pointers which were moved from both sides towards the middle, until
+ they meet.
+
+ Time Complexity = \textbf{O(n * log2(n))} for sorting and \textbf{O(n)} for the two pointer iteration 
+ which makes it \textbf{O(n * log2(n) + n)} \approx \textbf{O(n log2(n))} simply written as \textbf{O(n lg n)}.
+
+\bigskip
+
+Now what would have been the brute force approach?
+
+\smallskip
+
+
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+linenos
+]
+{cpp}
+
+// the array is not sorted
+// Time O(n^2)
+
+int number_of_pairs = 0;
+
+int ans = 0;
+for(int i = 1; i < n; i++) {
+
+        if(a[j] > k) continue;
+        
+        // for each element see how many elements
+        // before it if added to itself sum up to K
+        for(int j = 0; j < i; j++) {
+                if(a[i] + a[j] == k) 
+                        ans++; 
+        }
+}
+cout << ans << '\n';
+
+\end{minted}
+
+\bigskip
+
+Now what if, as we move ahead in the array, we keep saving the 
+frequencies for each element a[i], in a kind of \textbf{frequency array}.
+A frequency array is an array of size \geq~\textbf{max(a[i])} and is filled with 
+zeroes initially.
+
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+linenos
+]
+{cpp}
+
+// max a[i] is 10^6
+freq[(int)1e6] = {0};
+
+// you could also do for older C++ versions
+// memset(freq, 0, sizeof(freq));
+
+int ans = 0;
+for(int i = 0; i < n; i++) {
+        if(a[i] > k) continue;
+
+        // understand the next two statements properly!!!!!!!
+
+        // for every complimentary element k - a[i] occurring before
+        // we have a pair with a[i] hence,
+        ans += freq[k - a[i]];
+
+        // now save the current element's frequency
+        // We do it in O(1)
+        freq[a[i]]++;
+}
+\end{minted}
+
+\smallskip
+
+The time complexity of the above code is \textbf{O(min( n, max a[i] value)}.
+
+Now we know that 10\textsuperscript{7} iterations usually run in a second or two, but what if a[i]
+is very very large of the order 10\textsuperscript{18}? This is where the \textbf{std::map} comes to
+ rescue.
+
+ You will learn about Red-Black Trees in the DSA course (no you won't!). But for now, 
+ imagine they are simple frequency arrays. The time complexity to saving a new element comes 
+ down to \textbf{O(lg n)} but you now get to save huge elements.
+
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+linenos
+]
+{cpp}
+
+// <key, value> : a key can be an object with a comparator only, and for value we 
+// can have anything, a counter, or an address to some array anything!!!
+map<int, int> mp;
+
+mp.clear(); // this statement clears the map, use the same map for each test case
+// and clear like this right at the beginning of solve()
+
+int ans = 0;
+for(int i = 0; i < n; i++) {
+        if(a[i] > k) continue;
+
+        // compare this code to the one above
+
+        auto temp = mp.find(k - a[i]); // returns a map iterator to the pair <k - a[i], counter>
+        // actually it must be
+        // std::map<int, int>::iterator temp = mp.find(k - a[i]);
+        // but C++ compilers are smart and auto will write that shit for you post-compilation
+
+        // is temp a key in the map or not?
+        // or does find give us the end of the map?
+        if(temp != mp.end()) {
+                ans += *temp.second; // pair<int, int> is the return type, 
+                // use first and second to access values
+                // also written as 
+                // ans += temp->second;
+        }
+
+        // now save the current element's frequency
+        // We do it in O(log n)
+        mp[a[i]]++; // Like an array, map too provides 
+        // the operator[](), but here it works in O(log n)
+
+        // IMP : If you try to access an element not present in the map
+        // using int value = mp[x].second; then you will get 0
+        // the downside is it will add <x, 0> to the map too!
+        // that is why you must find x first using mp.find() and then
+        // change values, but if you are confident that an element x is
+        // definitely present, then go ahead, nothing is stopping you
+        // you can also use mp.count() > 0, read more on the internet
+}
+
+\end{minted}
+
+\section{Read the following before attempting assignment 4}
+
+\begin{itemize}
+        \item Prefix sum arrays
+        \item Finding range sum using prefix arrays
+        \item Unordered maps, and why we must avoid them sometimes
+        \item Side Mission : Learn the Kandane's Algorithm from GeeksForGeeks
+\end{itemize}
+
+Also, it is not always necessary to use std::map, for small values frequency arrays also work.
+
+\chapter{Assignment 4 on std::map}
+
+\subsection{Easy}
+
+\href{https://leetcode.com/problems/kth-missing-positive-number/}{Kth Missing Positive Number}
+
+\smallskip
+
+\href{https://codeforces.com/problemset/problem/1430/C}{C. Numbers on the Whiteboard}
+
+\subsection{Medium}
+
+\href{https://codeforces.com/problemset/problem/1006/C}{C. Three Parts of an Array}
+
+\smallskip
+
+\href{https://codeforces.com/problemset/problem/961/B}{B. Lecture Sleep}
+
+\subsection{Hard}
+
+\href{https://codeforces.com/contest/1506/problem/D}{D. Epic Transformations}
+
+\smallskip
+
+\href{https://codeforces.com/problemset/problem/1279/C}{C. Stack of Presents}
+
 \end{document}
