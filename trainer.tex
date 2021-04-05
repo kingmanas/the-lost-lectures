@@ -442,11 +442,11 @@ int number_of_pairs = 0;
 int ans = 0;
 for(int i = 1; i < n; i++) {
 
-        if(a[j] > k) continue;
-        
         // for each element see how many elements
         // before it if added to itself sum up to K
         for(int j = 0; j < i; j++) {
+                if(a[j] > k) continue;
+
                 if(a[i] + a[j] == k) 
                         ans++; 
         }
