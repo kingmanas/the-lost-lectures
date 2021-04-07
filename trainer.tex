@@ -474,7 +474,7 @@ linenos
 // max a[i] is 10^6
 freq[(int)1e6] = {0};
 
-// you could also do for older C++ versions
+// What you could also do; for older C++ versions
 // memset(freq, 0, sizeof(freq));
 
 int ans = 0;
@@ -495,7 +495,7 @@ for(int i = 0; i < n; i++) {
 
 \smallskip
 
-The time complexity of the above code is \textbf{O(min( n, max a[i] value)}.
+The time complexity of the above code is \textbf{O(max( n, max a[i] value)}.
 
 Now we know that 10\textsuperscript{7} iterations usually run in a second or two, but what if a[i]
 is very very large of the order 10\textsuperscript{18}? This is where the \textbf{std::map} comes to
