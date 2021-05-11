@@ -594,4 +594,200 @@ Also, it is not always necessary to use std::map, for small values frequency arr
 
 \href{https://codeforces.com/problemset/problem/1279/C}{C. Stack of Presents}
 
+\chapter{Graphs}
+
+\section{Depth First Search}
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+linenos
+]
+{cpp}
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define all(x) (x).begin(), (x).end()
+#define F first
+#define S second
+#define pb push_back
+
+typedef long long ll;
+
+__attribute__((unused)) const int MOD = 1e9 + 7;
+__attribute__((unused)) const int DOM = 998244353;
+
+const int N = (int)1e5;
+
+vector<int> g[N];
+vector<int> vis(N);
+
+void dfs(int x) {
+        cout << x << ' ';
+        vis[x] = 1;
+        for(int &i : g[x]) {
+                if(!vis[i]) {
+                        dfs(i);
+                }
+        }
+        return;
+}
+
+int solve() {
+
+        int n;
+        cin >> n;
+
+        for(int i = 0; i < n; i++) g[i].clear(), vis[i] = 0;
+
+        int m; cin >> m;
+        for(int i = 0; i < m; i++) {
+                int u, v;
+                cin >> u >> v;
+                g[u].push_back(v);
+                g[v].push_back(u);
+        }
+
+        dfs(0);
+        cout << '\n';
+
+        return 0;
+}
+
+int main() {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL), cout.tie(NULL);
+        
+        int t; 
+        cin >> t;
+
+        while(t--) {
+                solve();
+        }
+        return 0;
+}
+\end{minted}
+{cpp}
+
+\section{Breadth First Search}
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+linenos
+]
+{cpp}
+#include <bits/stdc++.h>
+using namespace std;
+
+#define all(x) (x).begin(), (x).end()
+#define F first
+#define S second
+#define pb push_back
+
+typedef long long ll;
+
+queue<int> que;
+
+// Adjacency List Representation
+int main()
+{
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL), cout.tie(NULL);
+
+        int t; cin >> t;
+
+        int n;
+        cin >> n;
+
+        vector<int> g[n + 1];
+
+        int m;
+        cin >> m;
+
+        for(int i = 0; i < m; i++) {
+                int u, v;
+                cin >> u >> v;
+                g[u].push_back(v);
+                g[v].push_back(u);
+        }
+
+        vector<bool> vis(n, 0);
+        vector<int> day(n, 0);
+
+        assert(que.empty());
+
+        que.push(1);
+        vis[1] = 1;
+        day[1] = 1;
+        while(!que.empty()) {
+                int x = que.front();
+                que.pop();
+
+                for(int &y : g[x]) {
+                        if(!vis[y]) {
+                                que.push(y);
+                                vis[y] = 1;
+                                day[y] = day[x] + 1;
+                        }
+                }
+
+                /*
+                for(int i = 0; i < (int)g[x].size(); i++) {
+                        if(!vis[g[x][i]]) {
+                                que.push(g[x][i]);
+                                day[g[x][i]] = day[x] + 1;
+                                vis[g[x][i]] = 1;
+                        }
+                }
+                */
+        }
+
+        for(int i = 0; i < n; i++) cout << i << ": " << day[i] << '\n';
+        return 0;
+}
+\end{minted}
+
+\chapter{Assignment 5}
+
+NOTE : The questions may or may/not use graphs, but they 
+might look like they do.
+
+\subsection{Easy}
+
+\href{https://codeforces.com/problemset/problem/1490/D}{1490D}
+
+\smallskip
+
+\href{https://codeforces.com/problemset/problem/371/B}{371B}
+
+\smallskip
+
+\subsection{Medium}
+
+\href{https://www.spoj.com/problems/DIGOKEYS/}{spoj/DIGOKEYS}
+
+\smallskip
+
+\href{https://www.spoj.com/problems/MULTII/}{spoj/MULTII}
+
+\smallskip
+
+\subsection{Hard}
+
+\href{https://codeforces.com/contest/813/problem/C}{813C}
+
+\smallskip
+
+\href{https://codeforces.com/problemset/problem/616/C}{616C}
+
+HINT: Take input as a grid, use pair<int, int> to represent a node,
+take a visited grid this time, edges are not explicitly taken as input, 
+you check all adjacent coordinates and if it is safe, you move to it
+
+\smallskip
+
 \end{document}
